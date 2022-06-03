@@ -16,18 +16,74 @@ class _ComponentViewState extends State<ComponentView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: const Color(0XFF8C7160),
         title: Text(widget.storyModel.name),
       ),
-      body: Column(
+      body: Stack(
         children: [
-          const SizedBox(height: 50),
-          Center(child: widget.storyModel.component),
-          const Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Text('Exemplo:'),
+          SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 80),
+                Center(
+                  child: SizedBox(
+                    child: FittedBox(child: widget.storyModel.component),
+                    height: 80,
+                  ),
+                ),
+                const SizedBox(
+                  height: 50,
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(12),
+                  child: Text('Exemplo:',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      )),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: Text(widget.storyModel.code,
+                      style: const TextStyle(
+                        fontSize: 20,
+                        color: Colors.amberAccent,
+                        shadows: [
+                          Shadow(
+                            color: Colors.black,
+                            blurRadius: 0.25,
+                          ),
+                        ],
+                      )),
+                ),
+              ],
+            ),
           ),
-          Text(widget.storyModel.code),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: copyButton(),
+          ),
         ],
+      ),
+    );
+  }
+
+  Widget copyButton() {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 24),
+      child: MaterialButton(
+        onPressed: () {},
+        child: const Text(
+          'Copiar',
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        shape: Border.all(
+          color: Colors.black,
+        ),
       ),
     );
   }

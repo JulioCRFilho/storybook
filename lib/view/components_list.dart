@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:storybook/mock.dart';
 import 'package:storybook/model/story_category.dart';
 import 'package:storybook/model/story_model.dart';
 import 'package:storybook/view/component_view.dart';
 
 class ComponentsList extends StatelessWidget {
-  final List<StoryCategory> categories;
-
-  const ComponentsList({Key? key, required this.categories}) : super(key: key);
+  const ComponentsList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final List<StoryCategory> categories = getCategories();
     categories.sort((a, b) => a.name.compareTo(b.name));
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: const Color(0XFF8C7160),
         title: const Text('Storybook'),
       ),
       body: SingleChildScrollView(
@@ -24,7 +25,7 @@ class ComponentsList extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      color: Colors.grey[400],
+                      color: Color(0XFFDAC8B3),
                       width: double.maxFinite,
                       alignment: Alignment.center,
                       padding: const EdgeInsets.all(2),
