@@ -20,8 +20,12 @@ class _ComponentViewState extends State<ComponentView> {
       ),
       body: Column(
         children: [
-          widget.storyModel.component,
-          Text('Exemplo:'),
+          const SizedBox(height: 50),
+          Center(child: widget.storyModel.component),
+          const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text('Exemplo:'),
+          ),
           Text(widget.storyModel.code),
         ],
       ),

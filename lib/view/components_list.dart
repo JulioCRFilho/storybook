@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:storybook/model/story_category.dart';
 import 'package:storybook/model/story_model.dart';
@@ -22,17 +21,67 @@ class ComponentsList extends StatelessWidget {
           children: categories
               .map(
                 (e) => Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(e.name),
-                    ...e.stories
-                        .map(
-                          (e) => Text(e.name),
-                        )
-                        .toList(),
+                    Container(
+                      color: Colors.grey[400],
+                      width: double.maxFinite,
+                      alignment: Alignment.center,
+                      padding: const EdgeInsets.all(2),
+                      child: Text(
+                        e.name,
+                        style: const TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    ...e.stories.map((e) => titleButton(e, context)).toList(),
                   ],
                 ),
               )
               .toList(),
+        ),
+      ),
+    );
+  }
+
+  Widget titleButton(StoryModel e, BuildContext context) {
+    return InkWell(
+      onTap: () => navigation(context, e),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  e.name,
+                  style: const TextStyle(
+                    fontSize: 18,
+                  ),
+                ),
+                Wrap(
+                  children: [
+                    Text(
+                      e.properties?.keys.join(', ') ?? '',
+                      style: const TextStyle(
+                        fontSize: 12,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 40,
+              width: 80,
+              child: Center(child: e.component),
+            ),
+          ],
         ),
       ),
     );
