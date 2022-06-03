@@ -11,33 +11,29 @@ class ComponentsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // categories.sort((a, b) => a.name.compareTo(b.name));
+    categories.sort((a, b) => a.name.compareTo(b.name));
 
     return Scaffold(
       appBar: AppBar(
         title: const Text('Storybook'),
       ),
-      body: ListView.builder(
-        itemCount: categories.length,
-        itemBuilder: (c, i) {
-          final category = categories[i];
-
-          return Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(category.name),
-              Flexible(
-                child: ListView.builder(
-                  primary: false,
-                  shrinkWrap: true,
-                  itemBuilder: (c, i) {
-                    return Text(category.name);
-                  },
+      body: SingleChildScrollView(
+        child: Column(
+          children: categories
+              .map(
+                (e) => Column(
+                  children: [
+                    Text(e.name),
+                    ...e.stories
+                        .map(
+                          (e) => Text(e.name),
+                        )
+                        .toList(),
+                  ],
                 ),
-              ),
-            ],
-          );
-        },
+              )
+              .toList(),
+        ),
       ),
     );
   }
