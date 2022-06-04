@@ -73,7 +73,11 @@ class _ComponentViewState extends State<ComponentView> {
     return Padding(
       padding: const EdgeInsets.only(bottom: 24),
       child: MaterialButton(
-        onPressed: () {},
+        onPressed: () => widget.copyToClipboard(widget.storyModel.code).then(
+              (value) => Scaffold.of(context).showBottomSheet(
+                (context) => const Text('Copiado para o Clipboard!'),
+              ),
+            ),
         child: const Text(
           'Copiar',
           style: TextStyle(
