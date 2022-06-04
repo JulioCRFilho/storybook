@@ -25,7 +25,7 @@ class ComponentsList extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      color: Color(0XFFDAC8B3),
+                      color: const Color(0XFFDAC8B3),
                       width: double.maxFinite,
                       alignment: Alignment.center,
                       padding: const EdgeInsets.all(2),
