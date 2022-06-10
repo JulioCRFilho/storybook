@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:storybook/main.dart';
 import 'package:storybook/model/story_model.dart';
 import 'package:storybook/presenter/component_view_presenter.dart';
 
@@ -71,13 +72,10 @@ class _ComponentViewState extends State<ComponentView> {
 
   Widget copyButton() {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 24),
+      padding: const EdgeInsets.only(bottom: 42),
       child: MaterialButton(
-        onPressed: () => widget.copyToClipboard(widget.storyModel.code).then(
-              (value) => Scaffold.of(context).showBottomSheet(
-                (context) => const Text('Copiado para o Clipboard!'),
-              ),
-            ),
+        onPressed: () async =>
+            await widget.copyToClipboard(widget.storyModel.code, context),
         child: const Text(
           'Copiar',
           style: TextStyle(
