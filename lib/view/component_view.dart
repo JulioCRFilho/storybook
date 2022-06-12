@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:storybook/main.dart';
 import 'package:storybook/model/story_model.dart';
 import 'package:storybook/presenter/component_view_presenter.dart';
+import 'package:storybook/widgets/tab_component.dart';
 
 class ComponentView extends StatefulWidget with ComponentViewPresenter {
   ComponentView({Key? key, required StoryModel story}) : super(key: key) {
@@ -29,7 +29,7 @@ class _ComponentViewState extends State<ComponentView> {
                 const SizedBox(height: 80),
                 Center(
                   child: SizedBox(
-                    child: FittedBox(child: widget.storyModel.component),
+                    child: FittedBox(child: widget.storyModel),
                     height: 80,
                   ),
                 ),
@@ -64,6 +64,10 @@ class _ComponentViewState extends State<ComponentView> {
           Align(
             alignment: Alignment.bottomCenter,
             child: copyButton(),
+          ),
+          Align(
+            alignment: Alignment.centerRight,
+            child: TabComponent(storyModel: widget.storyModel),
           ),
         ],
       ),

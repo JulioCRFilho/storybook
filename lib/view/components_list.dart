@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:storybook/main.dart';
 import 'package:storybook/mock.dart';
-import 'package:storybook/model/story_category.dart';
 import 'package:storybook/model/story_model.dart';
+import 'package:storybook/model/story_category.dart';
 import 'package:storybook/view/component_view.dart';
 
 class ComponentsList extends StatelessWidget {
@@ -22,7 +21,7 @@ class ComponentsList extends StatelessWidget {
         child: Column(
           children: categories
               .map(
-                (e) => Column(
+                (category) => Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
@@ -31,7 +30,7 @@ class ComponentsList extends StatelessWidget {
                       alignment: Alignment.center,
                       padding: const EdgeInsets.all(2),
                       child: Text(
-                        e.name,
+                        category.name,
                         style: const TextStyle(
                           fontSize: 20,
                           color: Colors.white,
@@ -39,7 +38,9 @@ class ComponentsList extends StatelessWidget {
                         ),
                       ),
                     ),
-                    ...e.stories.map((e) => titleButton(e, context)).toList(),
+                    ...category.stories
+                        .map((story) => titleButton(story, context))
+                        .toList(),
                   ],
                 ),
               )
@@ -49,9 +50,9 @@ class ComponentsList extends StatelessWidget {
     );
   }
 
-  Widget titleButton(StoryModel e, BuildContext context) {
+  Widget titleButton(StoryModel story, BuildContext context) {
     return InkWell(
-      onTap: () => navigation(context, e),
+      onTap: () => navigation(context, story),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(
@@ -61,7 +62,7 @@ class ComponentsList extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  e.name,
+                  story.name,
                   style: const TextStyle(
                     fontSize: 18,
                   ),
@@ -69,7 +70,7 @@ class ComponentsList extends StatelessWidget {
                 Wrap(
                   children: [
                     Text(
-                      e.properties?.keys.join(', ') ?? '',
+                      story.getProperties.join(', '),
                       style: const TextStyle(
                         fontSize: 12,
                       ),
@@ -81,7 +82,7 @@ class ComponentsList extends StatelessWidget {
             SizedBox(
               height: 40,
               width: 80,
-              child: Center(child: e.component),
+              child: Center(child: story),
             ),
           ],
         ),
